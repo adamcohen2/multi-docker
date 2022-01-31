@@ -3,18 +3,18 @@ services:
   - docker
 
 before_install:
-  - docker build -t adamcohen/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t adamgitlab/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true adamcohen/react-test npm test
+  - docker run -e CI=true adamgitlab/react-test npm test
 
 after_success:
-  - docker build -t adamcohen/multi-client ./client
-  - docker build -t adamcohen/multi-nginx ./nginx
-  - docker build -t adamcohen/multi-server ./server
-  - docker build -t adamcohen/multi-worker ./worker
+  - docker build -t adamgitlab/multi-client ./client
+  - docker build -t adamgitlab/multi-nginx ./nginx
+  - docker build -t adamgitlab/multi-server ./server
+  - docker build -t adamgitlab/multi-worker ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push adamcohen/multi-client
-  - docker push adamcohen/multi-nginx
-  - docker push adamcohen/multi-server
-  - docker push adamcohen/multi-worker
+  - docker push adamgitlab/multi-client
+  - docker push adamgitlab/multi-nginx
+  - docker push adamgitlab/multi-server
+  - docker push adamgitlab/multi-worker
